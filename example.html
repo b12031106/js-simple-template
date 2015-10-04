@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>JS Simple Template Example</title>
+	<script src="js-simple-template.js"></script>
+	<script type="js-simple-template" data-name="example">
+		<div class="example-template">
+			<form refs="form">
+				<input type="text" refs="input" value="value">
+				<button refs="button">IS A BUTTON</button>
+			</div>
+		</div>
+	</script>
+</head>
+<body>
+	<div id="contain"></div>
+
+	<script>
+	SimpleTemplate.scan();
+	var exampleTemplate = SimpleTemplate.get('example');
+	document.getElementById('contain').appendChild(exampleTemplate.element);
+	exampleTemplate.refs.form.onsubmit = function(e) {
+		e.preventDefault();
+	};
+	exampleTemplate.refs.input.onkeyup = function() {
+		console.log('keyup trigger');
+	};
+	exampleTemplate.refs.button.onclick = function() {
+		alert('button click');
+	};
+	</script>
+</body>
+</html>
