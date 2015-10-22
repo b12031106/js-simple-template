@@ -24,14 +24,12 @@
 		templateName = scriptElement.getAttribute('data-name');
 
 		if (templateName === null) {
-			console.warning('template name missing.');
 			return null;
 		}
 
 		childNodes = scriptElement.childNodes;
 
 		if (childNodes.length <= 0) {
-			console.warning('child node not found.')
 			return null;
 		}
 
@@ -43,7 +41,6 @@
 			var refName = refNode.getAttribute('refs');
 
 			if (refName === null) {
-				console.warning('has refs attribute but no value.');
 				continue;
 			}
 
@@ -62,7 +59,7 @@
 	window.SimpleTemplate = {
 
 		get: function(templateName) {
-			if (typeof _templates[templateName] === 'undefined' && !this.scan(templateName)) {
+			if (typeof _templates[templateName] === 'undefined') {
 				return null;
 			}
 			return _parse(_templates[templateName]);
@@ -77,8 +74,9 @@
 			for (var i = 0, len = scriptElements.length; i < len; i += 1) {
 				var scriptElement = scriptElements[i];
 				if (scriptElement.hasAttribute('scaned')) {
-					console.warning('template already scaned');
 					continue;
+				} else {
+					scriptElement.setAttribute('scaned', '1');
 				}
 				_parse(scriptElement);
 			}
